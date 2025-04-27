@@ -1,94 +1,35 @@
 #!/bin/bash
 
-# Check if GitHub CLI is installed
-if ! command -v gh &> /dev/null; then
-    echo "GitHub CLI is not installed. Please install it first."
-    echo "Visit: https://cli.github.com/manual/installation"
-    exit 1
-fi
-
-# Check if user is authenticated with GitHub CLI
-if ! gh auth status &> /dev/null; then
-    echo "You are not authenticated with GitHub CLI."
-    echo "Please run 'gh auth login' to authenticate."
-    exit 1
-fi
-
 # Function to display usage
 function show_usage {
-    echo "Usage: $0 <repo-name> [options]"
-    echo ""
-    echo "Options:"
-    echo "  -t, --template <template>    Template repository to use (default: none)"
-    echo "  -p, --private                Create private repository (default: public)"
-    echo "  -d, --description \"text\"     Repository description"
-    echo "  -h, --help                   Show this help message"
+    echo "Usage: $0 <new-project-folder> <repo-url> [branch]"
     echo ""
     echo "Example:"
-    echo "  $0 my-new-project -t username/template-repo -d \"My awesome project\""
+    echo "  $0 ~/projects/ai-project https://github.com/tazomatalax/ai-project-template.git"
 }
 
 # Parse command line arguments
-if [ $# -eq 0 ]; then
+if [ $# -lt 2 ]; then
     show_usage
     exit 1
 fi
 
-REPO_NAME=$1
-shift
+PROJECT_FOLDER=$1
+REPO_URL=$2
+BRANCH=${3:-main}
 
-TEMPLATE=""
-VISIBILITY="--public"
-DESCRIPTION=""
+# Inform about pulling files from repo branch
+echo "Creating a new project in '$PROJECT_FOLDER' by pulling template files from branch '$BRANCH' of repo: $REPO_URL"
 
-while (( "$#" )); do
-    case "$1" in
-        -t|--template)
-            TEMPLATE="-p $2"
-            shift 2
-            ;;
-        -p|--private)
-            VISIBILITY="--private"
-            shift
-            ;;
-        -d|--description)
-            DESCRIPTION="-d \"$2\""
-            shift 2
-            ;;
-        -h|--help)
-            show_usage
-            exit 0
-            ;;
-        *)
-            echo "Error: Unsupported option $1"
-            show_usage
-            exit 1
-            ;;
-    esac
-done
+git clone --single-branch --branch "$BRANCH" "$REPO_URL" "$PROJECT_FOLDER"
 
-# Create the repository
-echo "Creating repository: $REPO_NAME"
-COMMAND="gh repo create $REPO_NAME $TEMPLATE $VISIBILITY $DESCRIPTION"
-echo "Executing: $COMMAND"
-eval $COMMAND
-
-# Check if repository creation was successful
 if [ $? -eq 0 ]; then
-    echo "Repository '$REPO_NAME' created successfully!"
-    # Prompt for local folder name (default to repo name)
-    read -p "Enter local folder name to clone into (default: $REPO_NAME): " LOCAL_FOLDER
-    LOCAL_FOLDER=${LOCAL_FOLDER:-$REPO_NAME}
-    echo "Cloning repository into '$LOCAL_FOLDER'..."
-    gh repo clone $REPO_NAME "$LOCAL_FOLDER"
-    if [ $? -eq 0 ]; then
-        echo "Opening '$LOCAL_FOLDER' in a new VS Code window..."
-        code "$LOCAL_FOLDER" -n
-    else
-        echo "Failed to clone repository."
-        exit 1
-    fi
+    # Unlink the project from the template repository
+    rm -rf "$PROJECT_FOLDER/.git"
+    echo "Project created successfully in '$PROJECT_FOLDER' and unlinked from template repo!"
+    echo "Opening '$PROJECT_FOLDER' in a new VS Code window..."
+    code "$PROJECT_FOLDER" -n
 else
-    echo "Failed to create repository."
+    echo "Failed to create the project."
     exit 1
 fi
