@@ -1,3 +1,8 @@
+### Context7
+- **Always use the context7 MCP server** to reference documentation for libraries like Pydantic AI and Streamlit.
+- For the Tokens, start with 5000 but then increase to 20000 if your first search didn't give relavent documentation.
+- **Only search three times maximum, for any specific piece of documentation.** if you don't get what you need, use the Brove MCP server to perform a wider search. 
+
 ### 🔄 Project Awareness & Context
 - **Always read `PLANNING.md`** at the start of a new conversation to understand the project's architecture, goals, style, and constraints.
 - **Check `TASK.md`** before starting a new task. If the task isn’t listed, add it with a brief description and today's date.
