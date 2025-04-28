@@ -17,17 +17,45 @@ This template provides a standardized project structure optimized for AI-assiste
 ### Prerequisites
 
 - [VS Code](https://code.visualstudio.com/) with GitHub Copilot or other AI assistant
-- [GitHub CLI](https://cli.github.com/) (for repository creation)
+- [GitHub CLI](https://cli.github.com/) (optional, for repository management)
 - Python 3.8+ (for Python projects)
 - Node.js and npm (for MCP servers)
+- `curl` or `wget` (for downloading the setup script)
 
-### Installation
+### Quick Start
+
+Create a new project with a single command:
+
+```bash
+bash <(curl -s https://raw.githubusercontent.com/username/AI-project-template/main/create-project.sh) <new-project-folder> <repo-url> [branch]
+```
+
+Or, if you prefer `wget`:
+
+```bash
+bash <(wget -qO- https://raw.githubusercontent.com/username/AI-project-template/main/create-project.sh) <new-project-folder> <repo-url> [branch]
+```
+
+Example:
+
+```bash
+bash <(curl -s https://raw.githubusercontent.com/tazomatalax/AI-project-template/main/create-project.sh) ~/projects/my-new-project https://github.com/username/AI-project-template.git
+```
+
+This will:
+
+1. Download and execute the `create-project.sh` script
+2. Clone the template repository into the specified folder
+3. Unlink the project from the template repository
+4. Open the new project in a new VS Code window
+
+### Detailed Steps
 
 1. Clone this repository or use it as a template:
    ```bash
    git clone https://github.com/username/AI-project-template.git my-new-project
    ```
-   
+
 2. Navigate to your project directory:
    ```bash
    cd my-new-project
