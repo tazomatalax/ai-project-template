@@ -55,3 +55,4 @@
 - **Never hallucinate libraries or functions** – only use known, verified Python packages.
 - **Always confirm file paths and module names** exist before referencing them in code or tests.
 - **Never delete or overwrite existing code** unless explicitly instructed to or if part of a task from `TASK.md`.
+- If you are not sure about file content or codebase structure pertaining to the user’s request, **use your tools to read files and gather the relevant information: do NOT guess or make up an answer.**
