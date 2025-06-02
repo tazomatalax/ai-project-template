@@ -1,7 +1,7 @@
 ### Context7
 - **Always use the context7 MCP server** to reference documentation for libraries like Pydantic AI and Streamlit.
 - For the Tokens, start with 5000 but then increase to 20000 if your first search didn't give relavent documentation.
-- **Only search three times maximum, for any specific piece of documentation.** if you don't get what you need, use the Brove MCP server to perform a wider search. 
+- **Only search three times maximum, for any specific piece of documentation.** if you don't get what you need, use the Brave MCP server to perform a wider search. 
 
 ### 🔄 Project Awareness & Context
 - **Always read `PLANNING.md`** at the start of a new conversation to understand the project's architecture, goals, style, and constraints.
@@ -56,3 +56,4 @@
 - **Always confirm file paths and module names** exist before referencing them in code or tests.
 - **Never delete or overwrite existing code** unless explicitly instructed to or if part of a task from `TASK.md`.
 - If you are not sure about file content or codebase structure pertaining to the user’s request, **use your tools to read files and gather the relevant information: do NOT guess or make up an answer.**
+- You MUST plan extensively before each function call, and reflect extensively on the outcomes of the previous function calls. DO NOT do this entire process by making function calls only, as this can impair your ability to solve the problem and think insightfully.
