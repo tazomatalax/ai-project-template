@@ -45,6 +45,15 @@ git clone --single-branch --branch "$BRANCH" "$REPO_URL" "$PROJECT_FOLDER"
 if [ $? -eq 0 ]; then
     # Unlink the project from the template repository
     rm -rf "$PROJECT_FOLDER/.git"
+    
+    # Rename mcp.vscode directory to .vscode if it exists
+    if [ -d "$PROJECT_FOLDER/mcp.vscode" ]; then
+        mv "$PROJECT_FOLDER/mcp.vscode" "$PROJECT_FOLDER/.vscode"
+        echo "Renamed mcp.vscode to .vscode"
+    else
+        echo "Note: mcp.vscode directory not found in template"
+    fi
+    
     echo "Project created successfully in '$PROJECT_FOLDER' and unlinked from template repo!"
     echo "Opening '$PROJECT_FOLDER' in a new VS Code window..."
     code "$PROJECT_FOLDER" -n

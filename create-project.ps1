@@ -64,6 +64,14 @@ try {
             Remove-Item -Path "$ProjectFolder\.git" -Recurse -Force
         }
         
+        # Rename mcp.vscode directory to .vscode if it exists
+        if (Test-Path -Path "$ProjectFolder\mcp.vscode") {
+            Move-Item -Path "$ProjectFolder\mcp.vscode" -Destination "$ProjectFolder\.vscode"
+            Write-Host "Renamed mcp.vscode to .vscode"
+        } else {
+            Write-Host "Note: mcp.vscode directory not found in template"
+        }
+        
         Write-Host "Project created successfully in '$ProjectFolder' and unlinked from template repo!"
         Write-Host "Opening '$ProjectFolder' in a new VS Code window..."
         
