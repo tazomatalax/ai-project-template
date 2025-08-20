@@ -133,15 +133,37 @@ The template includes pre-configured MCP (Model Context Protocol) servers for en
 
 ## 📊 AI Workflow Integration
 
-This template is designed to optimize AI-assisted development workflows:
+This template is designed to optimize AI-assisted development workflows with multi-agent collaboration:
 
+### Dual-Agent Approach
+The template includes configuration for both **Claude** and **Gemini CLI** working together efficiently:
+
+**Example Workflow:**
+1. **Analysis Phase** (Gemini CLI):
+   ```bash
+   # Gemini analyzes and summarizes
+   gemini -p "Analyze @src/ for security vulnerabilities and rank top 3 issues"
+   ```
+   
+2. **Implementation Phase** (Claude):
+   ```
+   User shares Gemini's summary: "Found: 1) Missing rate limiting, 2) JWT expiration, 3) SQL injection risk"
+   Claude implements specific fixes based on the analysis
+   ```
+
+### Agent Instructions
+- **CLAUDE.md**: Instructions for Claude on leveraging Gemini CLI for analysis
+- **GEMINI.md**: Instructions for Gemini on providing token-efficient summaries
+- **AI_WORKFLOW.md**: General AI collaboration guidelines
+
+### Setup Steps
 1. Start by filling out `PLANNING.md` with project details
 2. Create initial task list in `TASK.md`
-3. Use AI global rules as described in `AI_WORKFLOW.md`
+3. Configure AI agents using their respective `.md` files
 4. Leverage MCP for enhanced AI capabilities
-5. Maintain documentation as you develop
+5. Use Gemini CLI for large-scale analysis, Claude for focused implementation
 
-For detailed guidance on effective AI collaboration, refer to `AI_WORKFLOW.md`.
+This approach **maximizes token efficiency** by having Gemini handle analysis/research and Claude handle implementation.
 
 ## 🛠️ Customization
 
