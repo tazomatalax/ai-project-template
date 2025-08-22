@@ -1,1 +1,0 @@
-explore the entire repository to understand the codebase from multiple angles: as a software architect, software developer and product manager. I want you to complie your findings into a very extensive markdown document in the root of the repository. Describing technical concepts, you should include mermaid diagrams in this markdown file
